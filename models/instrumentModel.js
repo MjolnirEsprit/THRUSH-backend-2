@@ -16,6 +16,9 @@ const schema = new mongoose.Schema({
     type: Number,
     required: [true, 'you must add a price']
   },
+  image: {
+    type: String
+  },
   reviews: []
 });
 
