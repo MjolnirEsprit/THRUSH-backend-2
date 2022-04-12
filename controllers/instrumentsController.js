@@ -1,5 +1,3 @@
-/*
-
 const express = require('express');
 const instrument = require('./../models/instrumentModel');
 
@@ -61,8 +59,7 @@ exports.deleteinstrument = async (req, res) => {
   }
 };
 
-*/
-
+/*
 const Instrument = require('./../models/instrumentModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
@@ -147,3 +144,4 @@ exports.deleteInstrument = catchAsync(async (req, res, next) => {
     data: null
   });
 });
+*/

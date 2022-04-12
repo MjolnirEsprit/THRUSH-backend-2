@@ -5,13 +5,13 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(instrumentController.getAllInstruments)
-  .post(instrumentController.createInstrument);
+  .get(instrumentController.getAllinstruments)
+  .post(instrumentController.addinstrument);
 
 router
   .route('/:id')
-  .get(instrumentController.getInstrument)
-  .put(instrumentController.updateInstrument)
-  .delete(instrumentController.deleteInstrument);
+  .get(instrumentController.getinstrument)
+  .put(instrumentController.updateinstrument)
+  .delete(instrumentController.deleteinstrument);
 
 module.exports = router;
