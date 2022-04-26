@@ -1,4 +1,4 @@
-const { Order, CartItem } = '../../models/order.model';
+const { Order, CartItem } = require('../../models/auction/order.model');
 
 exports.create = async (req, res) => {
   req.body.order.user = req.profile;
