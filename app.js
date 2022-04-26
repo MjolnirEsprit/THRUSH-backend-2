@@ -14,6 +14,13 @@ const courseRouter = require('./routes/courseRoutes');
 const userRouter = require('./routes/userRoutes');
 const instrumentRouter = require('./routes/instrumentRoutes');
 
+const userRoutes = require('./routes/auction/user.routes');
+const authRoutes = require('./routes/auction/auth.routes');
+const shopRoutes = require('./routes/auction/shop.routes');
+const productRoutes = require('./routes/auction/product.routes');
+const orderRoutes = require('./routes/auction/order.routes');
+const auctionRoutes = require('./routes/auction/auction.routes');
+
 const app = express();
 
 // 1) GLOBAL MIDDLEWARES
@@ -78,6 +85,12 @@ app.use('/api/v1/courses', courseRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/instruments', instrumentRouter);
+app.use('/api/v2/users', userRoutes);
+app.use('/api/v2/auth', authRoutes);
+app.use('/api/v2/shop', shopRoutes);
+app.use('/api/v2/product', productRoutes);
+app.use('/api/v2/order', orderRoutes);
+app.use('/api/v2/auction', auctionRoutes);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
