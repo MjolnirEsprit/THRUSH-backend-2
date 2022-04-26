@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = require('./app');
-const server = require("http").createServer(app);
+const server = require('http').createServer(app);
 const cors = require('cors');
 
 process.on('uncaughtException', err => {
@@ -11,7 +11,6 @@ process.on('uncaughtException', err => {
 });
 
 dotenv.config({ path: './config.env' });
-
 
 const DB = process.env.DATABASE;
 
@@ -42,25 +41,25 @@ app.use((req, res, next) => {
 
 app.use(cors());
 
-const io = require("socket.io")(server, {
+const io = require('socket.io')(server, {
   cors: {
-      origin: "*",
-      methods: ["GET", "POST"]
+    origin: '*',
+    methods: ['GET', 'POST']
   }
 });
 
-io.on("connection", (socket) => {
+io.on('connection', socket => {
   socket.emit('me', socket.id);
   socket.on('disconnect', () => {
-      socket.broadcast.emit("callended")
+    socket.broadcast.emit('callended');
   });
-  socket.on("calluser", ({userToCall, signalData, from, name}) => {
-      io.to(userToCall).emit("calluser", {signal: signalData, from, name});
+  socket.on('calluser', ({ userToCall, signalData, from, name }) => {
+    io.to(userToCall).emit('calluser', { signal: signalData, from, name });
   });
-  socket.on("answercall", (data) => {
-      io.to(data.to).emit("callaccepted", data.signal);
-  })
-})
+  socket.on('answercall', data => {
+    io.to(data.to).emit('callaccepted', data.signal);
+  });
+});
 
 process.on('unhandledRejection', err => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');
