@@ -3,7 +3,7 @@ const extend = require('lodash/extend');
 const Product = require('../../models/auction/product.model');
 
 const fs = 'fs';
-const defaultImage = require('./../../assets/images/default.png');
+//const defaultImage = require('./../../assets/images/default.png');
 
 exports.create = (req, res, next) => {
   const form = new formidable.IncomingForm();
@@ -45,7 +45,7 @@ exports.photo = (req, res, next) => {
   next();
 };
 exports.defaultPhoto = (req, res) => {
-  return res.sendFile(process.cwd() + defaultImage);
+  return res.sendFile(process.cwd());
 };
 
 exports.read = (req, res) => {

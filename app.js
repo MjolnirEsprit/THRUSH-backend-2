@@ -85,6 +85,8 @@ app.use('/api/v1/courses', courseRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/instruments', instrumentRouter);
+
+
 app.use('/api/v2/users', userRoutes);
 app.use('/api/v2/auth', authRoutes);
 app.use('/api/v2/shop', shopRoutes);

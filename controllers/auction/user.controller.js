@@ -2,12 +2,12 @@ const extend = require('lodash/extend');
 const request = require('request');
 const stripe = require('stripe');
 const config = require('./../../config/config');
-const User = require('../../models/auction/user.model');
+const UserAuction = require('../../models/auction/user.model');
 
 const myStripe = stripe(config.stripe_test_secret_key);
 
 exports.create = async (req, res) => {
-  const user = new User(req.body);
+  const user = new UserAuction(req.body);
   await user.save();
   return res.status(200).json({
     message: 'Successfully signed up!'
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
  * Load user and append to req.
  */
 exports.userByID = async (req, res, next, id) => {
-  const user = await User.findById(id);
+  const user = await UserAuction.findById(id);
   if (!user)
     return res.status('400').json({
       error: 'User not found'
@@ -34,7 +34,7 @@ exports.read = (req, res) => {
 };
 
 exports.list = async (req, res) => {
-  const users = await User.find().select('name email updated created');
+  const users = await UserAuction.find().select('name email updated created');
   res.json(users);
 };
 
@@ -116,7 +116,7 @@ exports.stripeCustomer = (req, res, next) => {
         source: req.body.token
       })
       .then(customer => {
-        User.update(
+        UserAuction.update(
           { _id: req.profile._id },
           { $set: { stripe_customer: customer.id } },
           err => {

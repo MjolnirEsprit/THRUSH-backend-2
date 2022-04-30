@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 
-const UserSchema = new mongoose.Schema({
+const UserAuctionSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
   stripe_customer: {}
 });
 
-UserSchema.virtual('password')
+UserAuctionSchema.virtual('password')
   .set(function(password) {
     this._password = password;
     this.salt = this.makeSalt();
@@ -42,7 +42,7 @@ UserSchema.virtual('password')
     return this._password;
   });
 
-UserSchema.path('hashed_password').validate(function(v) {
+UserAuctionSchema.path('hashed_password').validate(function(v) {
   if (this._password && this._password.length < 6) {
     this.invalidate('password', 'Password must be at least 6 characters.');
   }
@@ -51,7 +51,7 @@ UserSchema.path('hashed_password').validate(function(v) {
   }
 }, null);
 
-UserSchema.methods = {
+UserAuctionSchema.methods = {
   authenticate: function(plainText) {
     return this.encryptPassword(plainText) === this.hashed_password;
   },
@@ -71,6 +71,6 @@ UserSchema.methods = {
   }
 };
 
-const User = mongoose.model('User', UserSchema);
+const UserAuction = mongoose.model('UserAuction', UserAuctionSchema);
 
-module.exports = User;
+module.exports = UserAuction;

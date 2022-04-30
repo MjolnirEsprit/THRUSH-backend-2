@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
-const expressJwt = require('express-jwt');
-const User = require('../../models/auction/user.model');
+const { expressjwt } = require('express-jwt');
+const UserAuction = require('../../models/auction/user.model');
 const config = require('../../config/config');
 
 exports.signin = async (req, res) => {
   try {
-    const user = await User.findOne({
+    const user = await UserAuction.findOne({
       email: req.body.email
     });
 
@@ -54,8 +54,9 @@ exports.signout = (req, res) => {
   });
 };
 
-exports.requireSignin = expressJwt({
+exports.requireSignin = expressjwt({
   secret: config.jwtSecret,
+  algorithms: ["HS256"],
   userProperty: 'auth'
 });
 
