@@ -86,13 +86,12 @@ app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/instruments', instrumentRouter);
 
-
-app.use('/api/v2/users', userRoutes);
-app.use('/api/v2/auth', authRoutes);
-app.use('/api/v2/shop', shopRoutes);
-app.use('/api/v2/product', productRoutes);
-app.use('/api/v2/order', orderRoutes);
-app.use('/api/v2/auction', auctionRoutes);
+app.use('/api/v2/', userRoutes);
+app.use('/api/v2/', authRoutes);
+app.use('/api/v2/', shopRoutes);
+app.use('/api/v2/', productRoutes);
+app.use('/api/v2/', orderRoutes);
+app.use('/api/v2/', auctionRoutes);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
