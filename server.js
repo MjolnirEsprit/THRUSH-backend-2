@@ -1,16 +1,10 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const app = require('./app');
-const server = require('http').createServer(app);
+//const server = require('http').createServer(app);
 const cors = require('cors');
 
-process.on('uncaughtException', err => {
-  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
-  console.log(err.name, err.message);
-  process.exit(1);
-});
-
 dotenv.config({ path: './config.env' });
+const app = require('./app');
 
 const DB = process.env.DATABASE;
 
@@ -22,8 +16,8 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'));
 
-const port = 2000;
-server.listen(port, () => {
+const port = process.env.PORT || 2000;
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
 
@@ -40,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors());
-
+/*
 const io = require('socket.io')(server, {
   cors: {
     origin: '*',
@@ -60,6 +54,8 @@ io.on('connection', socket => {
     io.to(data.to).emit('callaccepted', data.signal);
   });
 });
+
+ */
 
 process.on('unhandledRejection', err => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');

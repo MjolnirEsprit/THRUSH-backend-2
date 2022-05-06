@@ -9,7 +9,6 @@ const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const productRouter = require('./routes/productRoutes');
 const courseRouter = require('./routes/courseRoutes');
 const userRouter = require('./routes/userRoutes');
 const instrumentRouter = require('./routes/instrumentRoutes');
@@ -75,7 +74,6 @@ app.use(cors());
 
 // 3) ROUTES
 app.use('/api/v1/courses', courseRouter);
-app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/instruments', instrumentRouter);
 
