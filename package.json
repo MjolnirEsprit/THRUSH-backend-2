@@ -1,7 +1,7 @@
 {
-  "name": "natours",
+  "name": "thrush-backend",
   "version": "1.0.0",
-  "description": "Learning node, express and mongoDB",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
