@@ -25,8 +25,8 @@ exports.getAllinstruments = async (req, res) => {
 
 exports.getinstrument = async (req, res) => {
   try {
-    const instrument = await instrument.findById(req.params.id);
-    res.status(200).json(instrument);
+    const instrumentdata = await instrument.findById(req.params.id);
+    res.status(200).json(instrumentdata);
   } catch (e) {
     console.log(e);
   }
@@ -36,13 +36,13 @@ exports.updateinstrument = async (req, res) => {
   const { id } = req.params;
   const { name, description, stock, price } = req.body;
   try {
-    const instrument = await Instrument.findByIdAndUpdate(id, {
+    const instrumentdata = await instrument.findByIdAndUpdate(id, {
       name,
       description,
       stock,
       price
     });
-    res.json(instrument);
+    res.json(instrumentdata);
   } catch (e) {
     res.status(500).send(e);
     console.log(e);
